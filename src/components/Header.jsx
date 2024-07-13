@@ -1,7 +1,7 @@
 import React from "react";
 import { useMemo } from "react";
 
-const Header = ({ cart, removeFromCart }) => {
+const Header = ({ cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart }) => {
   
 
   /* UseMemo evita que se ejecute el codigo si alguna de las dependencias que definamos no haya cambiado*/
@@ -17,7 +17,7 @@ const Header = ({ cart, removeFromCart }) => {
             <a href="index.html">
               <img
                 className="img-fluid"
-                src="./public/img/logo.svg"
+                src="/img/logo.svg"
                 alt="imagen logo"
               />
             </a>
@@ -26,7 +26,7 @@ const Header = ({ cart, removeFromCart }) => {
             <div className="carrito">
               <img
                 className="img-fluid"
-                src="./public/img/carrito.png"
+                src="/img/carrito.png"
                 alt="imagen carrito"
               />
 
@@ -58,11 +58,18 @@ const Header = ({ cart, removeFromCart }) => {
                             <td>{guitar.name} </td>
                             <td className="fw-bold">${guitar.price}</td>
                             <td className="flex align-items-start gap-4">
-                              <button type="button" className="btn btn-dark">
+                              <button 
+                              type="button" 
+                              className="btn btn-dark"
+                              onClick={()=>decreaseQuantity(guitar.id)}
+                              >
                                 -
                               </button>
                               {guitar.quantity}
-                              <button type="button" className="btn btn-dark">
+                              <button 
+                              type="button" className="btn btn-dark"
+                              onClick={()=>increaseQuantity(guitar.id)}
+                              >
                                 +
                               </button>
                             </td>
@@ -87,7 +94,10 @@ const Header = ({ cart, removeFromCart }) => {
                   </>
                 )}
 
-                <button className="btn btn-dark w-100 mt-3 p-2">
+                <button 
+                className="btn btn-dark w-100 mt-3 p-2"
+                onClick={clearCart}
+                >
                   Vaciar Carrito
                 </button>
               </div>
